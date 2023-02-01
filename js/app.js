@@ -20,100 +20,85 @@ const travelDistanceElement = document.querySelector('#form-container input[name
 
 const ageSelectorElement = document.querySelector('#form-container select[name="age-selector"]')
 
-// const totalPriceElement = document.getElementById('total-price')
+const userFullName = document.querySelector('#form-container input[name="full-name"]')
 
 console.log (travelDistanceElement, ageSelectorElement, priceGeneratorElement)
 
 priceGeneratorElement.addEventListener('click', function() {
-    // console.log('modify kms')
-    console.log(travelDistanceElement.value, ageSelectorElement.value)
 
-    const PRICE_PER_KM = 0.21
+console.log(travelDistanceElement.value, ageSelectorElement.value)
 
-    const totalPrice = travelDistanceElement.value * PRICE_PER_KM;
+
+const PRICE_PER_KM = 0.21
+
+let fullName = userFullName.value
+
+let travel = travelDistanceElement.value
+    if (travel < 0 || isNaN (travel)) {
+        travel = 'Not valid'
+    }
+
+
+const totalPrice = travel * PRICE_PER_KM;
     console.log(totalPrice)
 
-    let Euro = new Intl.NumberFormat('en-DE', {
-        style: 'currency',
-        currency: 'EUR',
-    })
 
-    let travel = travelDistanceElement.value
+let Euro = new Intl.NumberFormat('en-DE', {
+    style: 'currency',
+    currency: 'EUR',
+})
+    
 
-    let ageToSelect = ageSelectorElement.value
+let ageToSelect = ageSelectorElement.value
 
-    const youngPriceDiscount = document.querySelector('#form-container option[value="young"]')
+    if (ageToSelect == "young") {
 
-    const oldPriceDiscount = document.querySelector('#form-container option[value="old"]')
+        const youngDiscount = totalPrice * 0.2
+        console.log(youngDiscount)
 
-        // if (ageToSelect < 18){
+        const yourPrice = document.getElementById('total-price')
 
-        //     const youngDiscount = totalPrice * 0.2
-        //     console.log(youngDiscount)
+            if (isNaN (totalPrice)) {
+                yourPrice.innerHTML = 'Not valid'
+            }
 
-        //     const yourPrice = document.getElementById('total-price')
-        //     yourPrice.innerHTML = Euro.format(totalPrice - youngDiscount)
-        //     console.log(yourPrice)
-        // }
+            else {
+                yourPrice.innerHTML = Euro.format(totalPrice - youngDiscount)
+                console.log(yourPrice)
+            }
+            
+    }
 
-        if (ageToSelect == "young") {
+    else if (ageToSelect == "middle") {
 
-            const youngDiscount = totalPrice * 0.2
-            console.log(youngDiscount)
+        const noDiscount = totalPrice
 
-            const yourPrice = document.getElementById('total-price')
-            yourPrice.innerHTML = Euro.format(totalPrice - youngDiscount)
-            console.log(yourPrice)
-        }
+        const yourPrice = document.getElementById('total-price')
 
-        else if (ageToSelect == "old"){
-
-            const oldDiscount = totalPrice * 0.4
-            console.log(oldDiscount)
-
-            const yourPrice = document.getElementById('total-price')
-            yourPrice.innerHTML = Euro.format(totalPrice - oldDiscount)
-            console.log(yourPrice)
+        if (isNaN(totalPrice)) {
+            yourPrice.innerHTML = 'Not valid'
         }
 
         else {
-
-            const noDiscount = totalPrice
-            console.log(noDiscount)
-
+            yourPrice.innerHTML = Euro.format(noDiscount)
         }
 
-    
+    }
 
-    // let youngPrice = 0
+    else if (ageToSelect == "old"){
 
-    // let oldPrice = 0
+        const oldDiscount = totalPrice * 0.4
+        console.log(oldDiscount)
 
-    // let middlePrice = 0
-        
-    //     switch (ageToSelect) {
+        const yourPrice = document.getElementById('total-price')
 
-    //         case 'young':
-    //             youngPrice = Euro.format(totalPrice * 0.8)
-    //             break
-    //         case 'middle':
-    //             middlePrice = Euro.format(totalPrice)
-    //             break
-    //         case 'old':
-    //             oldPrice = Euro.format(totalPrice * 0.6)
-    //             break
-            
-    //     }
-    // console.log(youngPrice, middlePrice, oldPrice)
+            if (isNaN(totalPrice)) {
+                yourPrice.innerHTML = 'Not valid'
+            }
 
-    // const yourPrice = document.getElementById ('total-price')
-    // yourPrice.innerHTML = youngPrice , middlePrice , oldPrice
-
-
-
-
-    // console.log(travelDistanceElement, ageSelectorElement)
-
-
+            else {
+                yourPrice.innerHTML = Euro.format(totalPrice - oldDiscount)
+            }
+    }
 
 })

@@ -1,9 +1,47 @@
 :root {
-
+    --ticket-bg: #FE7614;
+    --row-bg: #DEE0C6;
 }
 
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+}
+
+body {
+    background-color: var(--ticket-bg);
+}
+
+h1 {
+    font-size: 3rem;
+    color: white;
+    text-transform: uppercase;
+}
+
+.container-style {
+    box-shadow: 0 0 5px 5px rgb(55, 55, 55);
+}
+
+.row-bg {
+    background-color: #DEE0C6;
+}
+
+h4 {
+    margin-bottom: 5rem;
+}
+
+.d-flex p {
+    font-size: 1.25rem;
+    font-weight: bold;
+    color: rgb(123, 123, 123);
+}
+
+.your-datas-title {
+    background-color: #aeaeae;
+    padding: 1rem;
+}
+
+.col-2 {
+    border-left: 1px solid grey;
 }
